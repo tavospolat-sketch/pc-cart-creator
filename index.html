@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PDF Libraries -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4/dist/fontkit.umd.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Main Workspace -->
+        <main class="editor-workspace">
+            <!-- Preview Area -->
+            <div class="preview-container">
+                <div class="preview-header">
+                    <h1 class="app-title">Primeclass Business Card Creator</h1>
+                    <p class="app-description">Please create your business card by filling in the information on the
+                        right. Business card dimensions are standardized as 8.5x5.5(h) cm. Please do not make any
+                        changes to the dimensions after creation.</p>
+                </div>
+
+                <div class="card-wrapper" id="cardPreview">
+                    <!-- 8.5cm x 5.5cm Card -->
+                    <div class="card-preview">
+                        <!-- Content Center/Left Aligned -->
+                        <div class="card-content">
+                            <div id="previewName" class="text-name">Polat İyem</div>
+                            <div id="previewTitle" class="text-title">Senior Art Director</div>
+
+                            <div class="spacer"></div>
+
+                            <div class="contact-block">
+                                <div class="text-contact"><span class="label">Phone: </span><span id="previewPhone">+90
+                                        530 078 45 38</span></div>
+                                <div class="text-contact"><span class="label">Email: </span><span
+                                        id="previewEmail">polat.iyem@tav.aero</span></div>
+                                <div class="text-contact"><span class="label">Website: </span><span
+                                        id="previewWebsite">www.primeclassofficial.com</span></div>
+                                <div id="previewAddress" class="text-address">Paris CDG Airport - Terminal E,<br>95700
+                                    Roissy-en-France</div>
+                            </div>
+
+                            <!-- Logo -->
+                            <img src="assets/amblem.png" class="card-logo">
+                        </div>
+                    </div>
+                </div>
+                <p class="preview-note">Preview (8.5cm x 5.5cm)</p>
+
+                <!-- Multilingual Instructions -->
+                <div class="instructions-container">
+                    <p><strong>TR:</strong> Lütfen eğer isminizde fontu desteklemeyen bir karakter varsa ikinci fontu
+                        yani Noto Sans'ı kullanın. Eğer tüm harfler destekleniyorsa Delmond Delicate kullanınız.</p>
+                    <p><strong>EN:</strong> Please use the second font (Noto Sans) if your name contains characters not
+                        supported by the default font. If all characters are supported, use Delmon Delicate.</p>
+                    <p><strong>IT:</strong> Per favore usa il secondo font (Noto Sans) se il tuo nome contiene caratteri
+                        non supportati. Se tutti i caratteri sono supportati, usa Delmon Delicate.</p>
+                    <p><strong>FR:</strong> Veuillez utiliser la deuxième police (Noto Sans) si votre nom contient des
+                        caractères non pris en charge. Si tous les caractères sont pris en charge, utilisez Delmon
+                        Delicate.</p>
+                    <p><strong>AR:</strong> يرجى استخدام الخط الثاني (Noto Sans) إذا كان اسمك يحتوي على أحرف غير مدعومة.
+                        إذا كانت جميع الأحرف مدعومة، استخدم Delmon Delicate.</p>
+                    <p><strong>KA:</strong> გთხოვთ, გამოიყენოთ მეორე შრიფტი (Noto Sans), თუ თქვენი სახელი შეიცავს
+                        მხარდაუჭერელ სიმბოლოებს. თუ ყველა სიმბოლო მხარდაჭერილია, გამოიყენეთ Delmon Delicate.</p>
+                    <p><strong>KK:</strong> Егер сіздің атыңызда қаріп қолдамайтын таңбалар болса, екінші қаріпті (Noto
+                        Sans) қолданыңыз. Егер барлық әріптер қолдау тапса, Delmon Delicate қолданыңыз.</p>
+                </div>
+
+                <!-- Download Button -->
+                <button id="downloadBtn" class="btn btn-primary btn-large">
+                    <i class="fa-solid fa-file-pdf"></i> Download Printable PDF
+                </button>
+            </div>
+
+            <!-- Sidebar Form -->
+            <aside class="sidebar">
+                <h3>Card Details</h3>
+                <div class="form-container">
+                    <div class="control-group">
+                        <label>Full Name</label>
+                        <input type="text" id="inputName" class="form-input" value="Polat İyem">
+                        <label style="margin-top: 5px; font-size: 0.8rem;">Name Font:</label>
+                        <select id="fontSelector" class="form-input" style="padding: 4px;">
+                            <option value="Delmon" selected>Delmon Delicate (Default)</option>
+                            <option value="Noto">Noto Sans (Alternative)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Title</label>
+                        <input type="text" id="inputTitle" class="form-input" value="Senior Art Director">
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="control-group">
+                        <label>Phone</label>
+                        <input type="text" id="inputPhone" class="form-input" value="+90 530 078 45 38">
+                    </div>
+                    <div class="control-group">
+                        <label>Email</label>
+                        <input type="email" id="inputEmail" class="form-input" value="polat.iyem@tav.aero">
+                    </div>
+                    <div class="control-group">
+                        <label>Website</label>
+                        <input type="text" id="inputWebsite" class="form-input" value="www.primeclassofficial.com">
+                    </div>
+                    <div class="control-group">
+                        <label>Address</label>
+                        <textarea id="inputAddress" class="form-input" rows="3">Paris CDG Airport - Terminal E,
+95700 Roissy-en-France</textarea>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

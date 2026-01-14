@@ -1,0 +1,297 @@
+:root {
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --primary: #c15a2d;
+    /* Custom Orange */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --glass: rgba(30, 41, 59, 0.7);
+    --font-ui: 'Inter', sans-serif;
+
+    /* Card Print Color */
+    --card-text: #c15a2d;
+}
+
+@font-face {
+    font-family: 'Delmon';
+    src: url('assets/Delmon Delicate.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto';
+    src: url('assets/Noto Sans Font Family/NotoSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'NotoBold';
+    src: url('assets/Noto Sans Font Family/NotoSans-Bold.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Navbar */
+.navbar {
+    height: 70px;
+    background: var(--glass);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.logo i,
+.highlight {
+    color: var(--primary);
+}
+
+.btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: var(--primary);
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Workspace */
+.editor-workspace {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.preview-container {
+    flex: 1;
+    background: transparent;
+    /* Changed from #0b1120 to show watermark */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Header Styles */
+.preview-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+}
+
+.app-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
+}
+
+.app-description {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Card Visuals - 85mm x 55mm ratio */
+/* We scale it up for display. 1mm approx 3.78px usually, let's use a factor of 5 or 6 */
+.card-wrapper {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.card-preview {
+    width: 510px;
+    /* 85 * 6 */
+    height: 330px;
+    /* 55 * 6 */
+    background: white;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    /* Vertical Center */
+    /* justify-content: flex-start;  Left aligned automatically */
+    position: relative;
+    /* For absolute logo */
+}
+
+/* Logo Logic */
+.card-logo {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    /* Adjust size as needed */
+    height: auto;
+}
+
+/* Content Container */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Left align text */
+    width: 100%;
+    color: var(--card-text);
+}
+
+.text-name {
+    font-family: 'Delmon', serif;
+    font-size: 48px;
+    /* Visual scale logic */
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.text-title {
+    font-family: 'Noto', sans-serif;
+    font-size: 18px;
+    margin-bottom: 2rem;
+}
+
+.spacer {
+    height: 1rem;
+}
+
+.text-contact {
+    font-family: 'Noto', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    display: flex;
+    gap: 4px;
+    /* Space between label and value */
+}
+
+/* Bold Label */
+.label {
+    font-family: 'NotoBold', sans-serif;
+    font-weight: 700;
+}
+
+.text-address {
+    font-family: 'NotoBold', sans-serif;
+    font-size: 14px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.preview-note {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Instructions Box */
+.instructions-container {
+    max-width: 600px;
+    margin-top: 2rem;
+    background: rgba(30, 41, 59, 0.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.instructions-container p {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.instructions-container strong {
+    color: var(--primary);
+}
+
+/* Moved Button */
+.btn-large {
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background: var(--primary);
+    box-shadow: 0 4px 15px rgba(193, 90, 45, 0.4);
+}
+
+.btn-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(193, 90, 45, 0.6);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 320px;
+    background: var(--bg-card);
+    border-left: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.form-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+    color: white;
+    padding: 0.8rem;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--primary);
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 0.5rem 0;
+}
