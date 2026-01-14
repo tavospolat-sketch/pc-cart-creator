@@ -208,6 +208,10 @@ body {
     font-size: 14px;
     margin-top: 5px;
     line-height: 1.4;
+    max-width: 340px;
+    /* ~2/3 of 510px canvas */
+    word-wrap: break-word;
+    /* Ensure clear break */
 }
 
 .preview-note {
