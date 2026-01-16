@@ -94,7 +94,9 @@ body {
 .editor-workspace {
     flex: 1;
     display: flex;
-    overflow: hidden;
+    overflow-y: auto;
+    /* Enable scroll at the workspace level */
+    height: 100%;
 }
 
 .preview-container {
@@ -104,6 +106,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: min-content;
+    /* Ensure container expands with content */
     justify-content: center;
     padding: 2rem;
 }
